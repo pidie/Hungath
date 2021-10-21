@@ -1,0 +1,91 @@
+Object:
+    - Clear all the tiles on the board by flipping them over one by one without your Population dropping to 0
+
+Set Up:
+    - 9 tiles are placed face-down on the board. Player starts with 10 Population and 50 food.
+    - Population is separated into two groups: Hunters and Gatherers; default is 5/5. 
+    
+Play:
+    - Player selects one tile to turn over. It can be one of four tiles:
+        - Land: Player loses 1 Food/Population.
+        - Fruit: Player gains +1 Food/Gatherer, plus .25 Food/Gatherer/Round
+        - Livestock: Player gains +3 Food/Hunter, plus .6 Food/Hunter/Round
+        - Predator: Player loses 1 Population, prioritizing Hunters.
+    - Player continues to flip over tiles until the board is cleared.
+    - At the end of the round, the new population is used to determine the number of tiles placed for the next round.
+    - If the player reaches a Population less than 1, the game is over.
+    
+Rules:
+    - At the start of the game, the number of each type of tile is determined:
+        - 40% of tiles are Land
+        - 25% of tiles are Fruit
+        - 20% of tiles are Predator
+        - 15% of tiles are Livestock
+    - Every other round, the percentage of Predator tiles increases by +4%, the percentage of Land tiles decreases by -2%, and Livestock and Fruit cards decrease by -1%.
+    - The exact number of tiles generated is rounded based on these percentages; if the number of tiles generated this way is less than the number of tiles that are supposed to exist, an additional Predator tile is introduced.
+    - Tiles are placed in a square grid of n by n, or in a rectangular grid of n by n + 1, where n cannot be less than 3 or more than 8.
+    - Therefore, the possible tile arrangements are:
+        - 3 X 3
+        - 3 X 4
+        - 4 X 4
+        - 4 X 5
+        - 5 X 5
+        - 5 X 6
+        - 6 X 6
+        - 6 X 7
+        - 7 X 7
+        - 7 X 8
+        - 8 X 8
+    - If the population exceeds the number of tiles doubled, the next tile arrangement is used.
+    - If a map has two different dimensions, it will be wider than long.
+    - Players can store a Max of 100 Food. Every round, this increases by 15.
+    - For every 0.5 Food/Population, there is a 5% chance per turn to increase Population by +1.
+        - Each birth has a 5% chance to be Twins, granting +2 population.
+    
+Gold Cards
+    - There is a 2% chance for a selected tile to become a Gold Tile, a more powerful version of the standard Tile.
+    - After finding a Gold tile, the percentage drops to 0% for 5 turns.
+    - Only standard Tiles may have Gold variants.
+    
+    Gold Land: Player loses 0.5 Food/Population, and Starvation doesn't take affect this turn.
+    Gold Fruit: Player Gains +2 Food/Gatherer, plus 0.25 Food/Gatherer/Round
+    Gold Livestock: Player gains +6 Food/Hunter, plus 0.6 Food/Hunter/Round
+    Gold Predator: Player loses 2 Population, prioritizing Hunters.
+
+Special Event Tiles
+
+    - There is a cumulative +0.5% chance that the selected tile will instead be a Special Event Tile.
+    - Once a Special Event Tile is spawned, the chance is set back to 0% for 5 turns before it starts building again.
+    
+    Plague: Lose 1 Population per turn for 5 turns.
+    Oasis: Grants +3 food/gath
+    Fertility Rites: 2x population growth for 10 turns
+    Hunting Net: Next predator is neutralized, grants +2 food/hunter
+    Wandering Nomads: Population increases by +5
+    Hunting Map: Locates 3 tiles that are either Livestock or Predators
+    Ancient Farm: Grants +2 food/gatherer, one adjacent tile becomes a Fruit tile
+    Predator Den: Attacked by 3 Predators.
+    Rot: Half of your stored Food rots to nothing.
+    Rock Slide: Lose 4 Population.
+    Stampede: Lose 5 Population, gain 2.5 Food/Hunter
+
+Round Bonuses:
+
+    - Upon completion of a round, the player gets to choose from 1 of 3 random bonuses. Each bonus has a percentage chance of appearing.
+    - These bonuses are carried through the game.
+    
+    Silos: Increase Food Storage by 50.
+    Improved Arrows: Increase food gain from Hunters by +0.5
+    Improved Baskets: Increase food gain from Gatherers by +0.4
+    Celestial Light: Increase chance for Special tile gain by 0.25%
+    Hand of Midas: Double Gold Card chance. Unique.
+    Experienced: Increase food gains per round for Hunters and Gatherers by 0.2
+    Hunter of Hunters: Chance that Hunters will kill Predators for +2 Food/Hunter, based on Hunter population. 15% - 100%
+    Tracking: When a tile is selected, indicate if adjacent tiles are Livestock or Predators.
+    Reaping Tools: Gatherers contribute +0.25 Food/Gatherer to Hunters.
+    Foraging Party: Hunters contribute +0.2 Food/Hunter to Gatherers.
+    Live Off The Land: Reduce food usage on Land tiles by 0.2/Population
+    Hard Bellies: +10% chance for Population to survive Starvation.
+    Evasion Tactics: +10% chance for Population to Survive a Predator attack.    
+    Twinning: +5% chance to have Twins
+    Romantic Allure: Food requirements for Population Growth reduced by 0.05
