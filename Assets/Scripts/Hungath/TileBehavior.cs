@@ -1,4 +1,5 @@
 using System;
+using Hungath.Game;
 using Hungath.UIManager;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ namespace Hungath
             {
                 isFaceDown = false;
                 transform.rotation = Quaternion.Euler(270f, 180f, 0);
-                Breeding();
+                Breeding.CheckForBirth();
                 Activate();
             }
         }
@@ -51,29 +52,6 @@ namespace Hungath
             {
                 Population.HunterPop -= 1;
                 Population.TotalPop -= 1;
-            }
-        }
-        
-        private void Breeding()
-        {
-            random = new System.Random();
-            
-            float food = Food.GetFood();
-            int pop = Population.TotalPop;
-
-            float foodPopRatio = food / pop;
-            int roll = random.Next(1, 20);
-            
-            Debug.Log($"roll: {roll} :: ratio: {foodPopRatio}");
-
-            if (roll <= foodPopRatio * 2)
-            {
-                Population.TotalPop++;
-                int twinCheck = random.Next(1, 20);
-                if (twinCheck == 20)
-                {
-                    Population.TotalPop++;
-                }
             }
         }
     }

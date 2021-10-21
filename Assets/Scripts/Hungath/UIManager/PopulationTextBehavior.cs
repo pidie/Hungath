@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class PopulationTextBehavior : MonoBehaviour
 {
-	[SerializeField]	private Population pop;
-	
 	private void OnMouseDown()
 	{
-		pop.CenterSlider();
+		Population.CenterSlider();
+		Debug.Log("click");
 	}
 }
