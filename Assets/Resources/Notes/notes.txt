@@ -8,8 +8,8 @@ Set Up:
 Play:
     - Player selects one tile to turn over. It can be one of four tiles:
         - Land: Player loses 1 Food/Population.
-        - Fruit: Player gains +1 Food/Gatherer, plus .25 Food/Gatherer/Round
-        - Livestock: Player gains +3 Food/Hunter, plus .6 Food/Hunter/Round
+        - Berry: Player gains +1 Food/Gatherer, plus .25 Food/Gatherer/Round
+        - Goat: Player gains +3 Food/Hunter, plus .6 Food/Hunter/Round
         - Predator: Player loses 1 Population, prioritizing Hunters.
     - Player continues to flip over tiles until the board is cleared.
     - At the end of the round, the new population is used to determine the number of tiles placed for the next round.
@@ -18,11 +18,11 @@ Play:
 Rules:
     - At the start of the game, the number of each type of tile is determined:
         - 40% of tiles are Land
-        - 25% of tiles are Fruit
+        - 25% of tiles are Berries
         - 20% of tiles are Predator
-        - 15% of tiles are Livestock
-    - Every other round, the percentage of Predator tiles increases by +4%, the percentage of Land tiles decreases by -2%, and Livestock and Fruit cards decrease by -1%.
-    - The exact number of tiles generated is rounded based on these percentages; if the number of tiles generated this way is less than the number of tiles that are supposed to exist, an additional Predator tile is introduced.
+        - 15% of tiles are Goats
+    - Every other round, the percentage of Predator tiles increases by +4%, the percentage of Land tiles decreases by -2%, and Goat and Berry cards decrease by -1%.
+    - The exact number of tiles generated is rounded based on these percentages; if the number of tiles generated this way is less than the number of tiles that are supposed to exist, an additional Predator tile is added.
     - Tiles are placed in a square grid of n by n, or in a rectangular grid of n by n + 1, where n cannot be less than 3 or more than 8.
     - Therefore, the possible tile arrangements are:
         - 3 X 3
@@ -48,8 +48,8 @@ Gold Cards
     - Only standard Tiles may have Gold variants.
     
     Gold Land: Player loses 0.5 Food/Population, and Starvation doesn't take affect this turn.
-    Gold Fruit: Player Gains +2 Food/Gatherer, plus 0.25 Food/Gatherer/Round
-    Gold Livestock: Player gains +6 Food/Hunter, plus 0.6 Food/Hunter/Round
+    Gold Berry: Player Gains +2 Food/Gatherer, plus 0.25 Food/Gatherer/Round
+    Gold Goat: Player gains +6 Food/Hunter, plus 0.6 Food/Hunter/Round
     Gold Predator: Player loses 2 Population, prioritizing Hunters.
 
 Special Event Tiles
@@ -62,8 +62,8 @@ Special Event Tiles
     Fertility Rites: 2x population growth for 10 turns
     Hunting Net: Next predator is neutralized, grants +2 food/hunter
     Wandering Nomads: Population increases by +5
-    Hunting Map: Locates 3 tiles that are either Livestock or Predators
-    Ancient Farm: Grants +2 food/gatherer, one adjacent tile becomes a Fruit tile
+    Hunting Map: Locates 3 tiles that are either Goats or Predators
+    Ancient Farm: Grants +2 food/gatherer, one adjacent tile becomes a Berry tile
     Predator Den: Attacked by 3 Predators.
     Rot: Half of your stored Food rots to nothing.
     Rock Slide: Lose 4 Population.
@@ -81,7 +81,7 @@ Round Bonuses:
     Hand of Midas: Double Gold Card chance. Unique.
     Experienced: Increase food gains per round for Hunters and Gatherers by 0.2
     Hunter of Hunters: Chance that Hunters will kill Predators for +2 Food/Hunter, based on Hunter population. 15% - 100%
-    Tracking: When a tile is selected, indicate if adjacent tiles are Livestock or Predators.
+    Tracking: When a tile is selected, indicate if adjacent tiles are Goats or Predators.
     Reaping Tools: Gatherers contribute +0.25 Food/Gatherer to Hunters.
     Foraging Party: Hunters contribute +0.2 Food/Hunter to Gatherers.
     Live Off The Land: Reduce food usage on Land tiles by 0.2/Population
