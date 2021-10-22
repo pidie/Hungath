@@ -22,7 +22,7 @@ namespace Hungath.UIManager
 
         private void Awake()
         {
-            food = 50f;
+            food = (Population.TotalPop * 2) + 30;
         }
 
         private void Update()
