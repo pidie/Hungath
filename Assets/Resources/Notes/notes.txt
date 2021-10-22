@@ -89,3 +89,31 @@ Round Bonuses:
     Evasion Tactics: +10% chance for Population to Survive a Predator attack.    
     Twinning: +5% chance to have Twins
     Romantic Allure: Food requirements for Population Growth reduced by 0.05
+
+Tribes:
+
+    - Players will choose a Tribe upon starting a new game
+    - Each Tribe will confer a small bonus that will impact gameplay
+    
+    Tribe of the Fang:
+        - +1% Predator/round
+        - All Predators drop +2 Food/Hunter when killed
+    Tribe of the Sun:
+        - Berries grant +1 Food/Gatherer
+        - Double chance for a Golden Berry
+    Tribe of the Mountain:
+        - Land tiles cost half Food
+        - Land tiles Reveal tiles to the North, South, East, and West of it when selected.
+    Tribe of the Goat:
+        - Goats grant +2 Food/Hunter
+        - Each Goat tile grants +1 Armor
+            - Upon selecting a Predator tile, 1 Armor is expended
+            - Armor grants a +40% chance to negate the attack of a Predator
+    Tribe of the River:
+        - Goats are replaced by Fish, which grant 4 Food/Hunter
+        - Predators can be Distracted by sacrificing Food
+            - Distraction costs 10 Food
+            - Costs increases by 1 per use and by 5 per Round
+    Tribe of the Totem:
+        - Special Event Tile spawn chance starts at 5%
+        - Selecting a Land tile increases the spawn chance by +0.5%
