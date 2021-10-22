@@ -89,11 +89,11 @@ namespace Hungath.Game
                     tile.tileImage = Resources.Load<Material>("Materials/TileFaceLand");
                     break;
                 case 1:
-                    tile.tileType = TileType.Fruit;
+                    tile.tileType = TileType.Berry;
                     tile.tileImage = Resources.Load<Material>("Materials/TileFaceForage");
                     break;
                 case 2:
-                    tile.tileType = TileType.Livestock;
+                    tile.tileType = TileType.Goat;
                     tile.tileImage = Resources.Load<Material>("Materials/TileFaceLivestock");
                     break;
                 case 3:

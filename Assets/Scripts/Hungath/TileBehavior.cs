@@ -1,7 +1,7 @@
-using System;
 using Hungath.Game;
 using Hungath.UIManager;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Hungath
 {
@@ -20,23 +20,29 @@ namespace Hungath
         {
             isFaceDown = true;
             transform.rotation = Quaternion.Euler(90, 0, 0);
-            // random = new System.Random();
         }
 
         private void OnMouseDown()
         {
-            if (isFaceDown)
+            if (EventSystem.current.IsPointerOverGameObject())
             {
-                isFaceDown = false;
-                transform.rotation = Quaternion.Euler(270f, 180f, 0);
-                Breeding.CheckForBirth();
-                Activate();
+                return;
+            }
+            else
+            {
+                if (isFaceDown)
+                {
+                    isFaceDown = false;
+                    transform.rotation = Quaternion.Euler(270f, 180f, 0);
+                    Breeding.CheckForBirth();
+                    Activate();
+                }
             }
         }
 
         private void Activate()
         {
-            if (tileType == TileType.Fruit)
+            if (tileType == TileType.Berry)
             {
                 int foodGain = Population.GathererPop;
                 Food.AdjustFood(foodGain);
@@ -46,7 +52,7 @@ namespace Hungath
             {
                 Food.AdjustFood(-Population.TotalPop);
             }
-            else if (tileType == TileType.Livestock)
+            else if (tileType == TileType.Goat)
             {
                 int foodGain = Population.HunterPop * 3;
                 Food.AdjustFood(foodGain);
