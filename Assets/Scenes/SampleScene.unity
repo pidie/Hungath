@@ -514,8 +514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the information banner. When in game events occur, you will be
-    notified of them here.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -542,7 +541,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.55
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -848,7 +847,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 395303326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4480e1a8b8e4264cb35aa26b11ee3ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 864689af1d00875449a62a7f26cb69ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bannerMessage: {fileID: 183815361}
@@ -2241,7 +2240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6886792, g: 0.45054525, b: 0.16470589, a: 0.29803923}
+  m_Color: {r: 0.6509434, g: 0.42590412, b: 0.15659486, a: 0.29803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

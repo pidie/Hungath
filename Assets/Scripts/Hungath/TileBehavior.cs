@@ -38,7 +38,9 @@ namespace Hungath
         {
             if (tileType == TileType.Fruit)
             {
-                Food.AdjustFood(Population.GathererPop);
+                int foodGain = Population.GathererPop;
+                Food.AdjustFood(foodGain);
+                BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertFoodGain, foodGain);
             }
             else if (tileType == TileType.Land)
             {
@@ -46,12 +48,16 @@ namespace Hungath
             }
             else if (tileType == TileType.Livestock)
             {
-                Food.AdjustFood(Population.HunterPop * 3);
+                int foodGain = Population.HunterPop * 3;
+                Food.AdjustFood(foodGain);
+                BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertFoodGain, foodGain);
             }
             else if (tileType == TileType.Predator)
             {
-                Population.HunterPop -= 1;
-                Population.TotalPop -= 1;
+                int popLost = 1;
+                Population.HunterPop -= popLost;
+                Population.TotalPop -= popLost;
+                BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertPopulationDecreasePredator, popLost);
             }
         }
     }
