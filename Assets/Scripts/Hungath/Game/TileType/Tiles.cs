@@ -7,6 +7,7 @@ namespace Hungath
 		Goat,
 		Predator,
 		Fish,
+		Herd,
 		SetPlague,
 		SetOasis,
 		SetFertilityRites,

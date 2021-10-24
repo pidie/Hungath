@@ -105,8 +105,8 @@ Tribes:
         - Land tiles cost half Food
         - Land tiles Reveal tiles to the North, South, East, and West of it when selected.
     Tribe of the Goat:
-        - Goats grant +2 Food/Hunter
-        - Each Goat tile grants +1 Armor
+        - Goats have a 20% chance to appear as a Herd of 3 goats
+        - Each Goat tile grants +1 Armor; Herds grant 3 Armor
             - Upon selecting a Predator tile, 1 Armor is expended
             - Armor grants a +40% chance to negate the attack of a Predator
     Tribe of the River:

@@ -2,37 +2,31 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Hungath.UIManager;
+using Random = System.Random;
 
 namespace Hungath.Game
 {
     public class TileManager : MonoBehaviour
     {
-        public int numOfLandTiles;
-        public int numOfFruitTiles;
-        public int numOfLivestockTiles;
-        public int numOfPredatorTiles;
+        public int numOfLandTiles, numOfBerryTiles, numOfGoatTiles, numOfPredatorTiles;
+        private int[] _mapSize;
+        private int _width, _height;
+        private Random _random;
 
-        private int[] mapSize;
-        private int width;
-        private int height;
+        private const float TileBuffer = 0.15f;
 
-        private System.Random random;
-
-        private float tileBuffer = 0.15f;
-
-        [Header("Tile Percentages by Type")] [SerializeField]
-        private float landPercentage = 0.4f;
-
-        [SerializeField] private float fruitPercentage = 0.25f;
-        [SerializeField] private float livestockPercentage = 0.15f;
+        [Header("Tile Percentages by Type")] 
+        [SerializeField] private float landPercentage = 0.4f;
+        [SerializeField] private float berryPercentage = 0.25f;
+        [SerializeField] private float goatPercentage = 0.15f;
         [SerializeField] private float predatorPercentage = 0.2f;
 
         private void Awake()
         {
-            mapSize = GameManager.GetMapSize(Population.TotalPop);
-            width = mapSize[0];
-            height = mapSize[1];
-            random = new System.Random();
+            _mapSize = GameManager.GetMapSize(Population.TotalPop);
+            _width = _mapSize[0];
+            _height = _mapSize[1];
+            _random = new Random();
             DetermineNumberOfTileTypes();
             GenerateTiles();
         }
@@ -45,15 +39,15 @@ namespace Hungath.Game
             float yPosition = startPositions[1];
 
             int lands = numOfLandTiles;
-            int fruits = numOfFruitTiles;
-            int livestocks = numOfLivestockTiles;
+            int berries = numOfBerryTiles;
+            int goats = numOfGoatTiles;
             int predators = numOfPredatorTiles;
 
-            List<int> tilePool = new List<int>() {lands, fruits, livestocks, predators};
+            List<int> tilePool = new List<int> {lands, berries, goats, predators};
 
-            for (int w = 0; w < width; w++)
+            for (int w = 0; w < _width; w++)
             {
-                for (int h = 0; h < height; h++)
+                for (int h = 0; h < _height; h++)
                 {
                     GameObject tile = Resources.Load<GameObject>("Prefabs/Tile");
                     RandomAssign(tilePool, tile.GetComponent<TileBehavior>());
@@ -75,11 +69,8 @@ namespace Hungath.Game
             
             while (looper)
             {
-                selection = random.Next(options.Count);
-                if (options[selection] > 0)
-                {
-                    looper = false;
-                }
+                selection = _random.Next(options.Count);
+                if (options[selection] > 0) looper = false;
             }
 
             switch (selection)
@@ -90,11 +81,11 @@ namespace Hungath.Game
                     break;
                 case 1:
                     tile.tileType = TileType.Berry;
-                    tile.tileImage = Resources.Load<Material>("Materials/TileFaceForage");
+                    tile.tileImage = Resources.Load<Material>("Materials/TileFaceBerry");
                     break;
                 case 2:
                     tile.tileType = TileType.Goat;
-                    tile.tileImage = Resources.Load<Material>("Materials/TileFaceLivestock");
+                    tile.tileImage = Resources.Load<Material>("Materials/TileFaceGoat");
                     break;
                 case 3:
                     tile.tileType = TileType.Predator;
@@ -111,22 +102,22 @@ namespace Hungath.Game
 
         private float[] GetStartPositions()
         {
-            float xPosition = (width + ((width - 1) * tileBuffer)) / -2;
-            float yPosition = (height + ((height - 1) * tileBuffer)) / -2;
+            float xPosition = (_width + (_width - 1) * TileBuffer) / -2;
+            float yPosition = (_height + (_height - 1) * TileBuffer) / -2;
 
-            return new float[] {xPosition + 0.5f, yPosition + 0.5f};
+            return new [] {xPosition + 0.5f, yPosition + 0.5f};
         }
 
         private void DetermineNumberOfTileTypes()
         {
-            int sumOfTiles = height * width;
+            int sumOfTiles = _height * _width;
 
-            numOfLandTiles = (int) Mathf.Round(sumOfTiles * landPercentage);
-            numOfFruitTiles = (int) Mathf.Round(sumOfTiles * fruitPercentage);
-            numOfLivestockTiles = (int) Mathf.Round(sumOfTiles * livestockPercentage);
-            numOfPredatorTiles = (int) Mathf.Round(sumOfTiles * predatorPercentage);
+            numOfLandTiles =        (int) Mathf.Round(sumOfTiles * landPercentage);
+            numOfBerryTiles =       (int) Mathf.Round(sumOfTiles * berryPercentage);
+            numOfGoatTiles =        (int) Mathf.Round(sumOfTiles * goatPercentage);
+            numOfPredatorTiles =    (int) Mathf.Round(sumOfTiles * predatorPercentage);
 
-            int sumOfCreatedTiles = numOfFruitTiles + numOfLandTiles + numOfLivestockTiles + numOfPredatorTiles;
+            int sumOfCreatedTiles = numOfBerryTiles + numOfLandTiles + numOfGoatTiles + numOfPredatorTiles;
 
             if (sumOfCreatedTiles < sumOfTiles)
             {

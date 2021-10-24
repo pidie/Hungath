@@ -1,14 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Hungath.UIManager;
 using UnityEngine;
 
-public class PopulationTextBehavior : MonoBehaviour
+namespace Hungath.UIManager
 {
-	private void OnMouseDown()
+	public class PopulationTextBehavior : MonoBehaviour
 	{
-		Population.CenterSlider();
-		Debug.Log("click");
+		private void OnMouseDown()
+		{
+			Population.CenterSlider();
+		}
 	}
 }

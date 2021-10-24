@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Hungath.UIManager;
-using UnityEngine;
 
 namespace Hungath.Game
 {
@@ -13,30 +10,26 @@ namespace Hungath.Game
         {
             _random = new System.Random();
             
-            float food = Food.GetFood();
-            int pop = Population.TotalPop;
+            var foodPopRatio = Food.GetFood() / Population.TotalPop;
+            var roll = _random.Next(1, 20);
 
-            float foodPopRatio = food / pop;
-            int roll = _random.Next(1, 20);
+            var children = 0;
 
-            int children = 0;
-            
-            if (roll <= foodPopRatio * 2)
+            if (roll <= foodPopRatio)
             {
                 children++;
+                var messageType = BannerMessageType.AlertPopulationGrowth;
                 int twinCheck = _random.Next(1, 20);
                 if (twinCheck == 20)
                 {
                     children++;
+                    messageType = BannerMessageType.AlertPopulationGrowthTwin;
                 }
+                BannerMessage.CreateNewBannerMessage(messageType, children);
             }
-            
             GiveBirth(children);
         }
         
-        private static void GiveBirth(int amount)
-        {
-            Population.TotalPop += amount;
-        }
+        private static void GiveBirth(int amount) => Population.TotalPop += amount;
     }
 }

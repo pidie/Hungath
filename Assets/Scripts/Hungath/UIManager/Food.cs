@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,43 +5,26 @@ namespace Hungath.UIManager
 {
     public class Food : MonoBehaviour
     {
-        private static float food;
-        private static bool starvation;
-        [SerializeField] private TMP_Text foodText; 
+        private static float _food;
+        [SerializeField] private TMP_Text foodText;
+
+        private void Awake() => _food = (Population.TotalPop * 2) + 30;
 
         public static float GetFood()
         {
-            return food;
-        }
-        
-        public static void AdjustFood(int amount)
-        {
-            food += amount;
+            return _food;
         }
 
-        private void Awake()
+        public static void AdjustFood(int amount)
         {
-            food = (Population.TotalPop * 2) + 30;
+            _food += amount;
+            if (_food < 0) _food = 0;
         }
 
         private void Update()
         {
-            CheckForStarvation();
-            int rubberFood = (int) Mathf.Floor(food);
+            var rubberFood = (int) Mathf.Floor(_food);
             foodText.text = $"Food: {rubberFood.ToString()}";
-        }
-
-        private void CheckForStarvation()
-        {
-            if (food < 1)
-            {
-                starvation = true;
-            }
-
-            if (starvation && food > 1)
-            {
-                starvation = false;
-            }
         }
     }
 }

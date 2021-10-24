@@ -8,13 +8,11 @@ namespace Hungath
     public class TileBehavior : MonoBehaviour
     {
         public TileType tileType;
-        public Material tileImage;
-        public Material tileBackImage;
+        public Material tileImage, tileBackImage;
         public bool isFaceDown;
         public bool isGolden;
  
         public GameObject face;
-        private System.Random random;
 
         private void Awake()
         {
@@ -24,10 +22,7 @@ namespace Hungath
 
         private void OnMouseDown()
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                return;
-            }
+            if (EventSystem.current.IsPointerOverGameObject()) return;
             else
             {
                 if (isFaceDown)
@@ -36,6 +31,7 @@ namespace Hungath
                     transform.rotation = Quaternion.Euler(270f, 180f, 0);
                     Breeding.CheckForBirth();
                     Activate();
+                    Starvation.CheckForStarvation();
                 }
             }
         }
@@ -61,7 +57,15 @@ namespace Hungath
             else if (tileType == TileType.Predator)
             {
                 int popLost = 1;
-                Population.HunterPop -= popLost;
+
+                if (Population.HunterPop > 0)           Population.HunterPop -= popLost;
+                else if (Population.GathererPop > 0)    Population.GathererPop -= popLost;
+                else
+                {
+                    BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertGameOver);
+                    return;
+                }
+                
                 Population.TotalPop -= popLost;
                 BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertPopulationDecreasePredator, popLost);
             }
