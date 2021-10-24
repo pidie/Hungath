@@ -1,44 +1,51 @@
 using System.Collections;
-using Hungath.UIManager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Banner : MonoBehaviour
+namespace Hungath.UIManager
 {
-    public TMP_Text bannerMessage;
-    public Image background;
+    public class Banner : MonoBehaviour
+    {
+        public TMP_Text bannerMessage;
+        public Image background;
+        public Transform spawnPoint;
 
-    private void Awake()
-    {
-        ResetBanner();
-    }
-
-    public void ResetBanner()
-    {
-        BannerMessage.CreateNewBannerMessage(BannerMessageType.DebugBlank);
-    }
-    
-    public void OnPointerClickBanner()
-    {
-        // called by Event Trigger in the inspector
-        FadeBannerMessage();
-    }
-
-    public void FadeBannerMessage()
-    {
-        float startTime = Time.deltaTime;
-        float duration = 1.5f;
-        var alpha = FadeBannerMessage(startTime, duration);
-    }
-
-    public IEnumerator FadeBannerMessage(float startTime, float duration)
-    {
-        //use current frame rate and last frame rate to determine the next alphaDrop so the whole thing lasts 1.5s
-        for (float i = 0; i < duration; i++)
+        private void Awake()
         {
-            background.color = new Color(background.color.r, background.color.g, background.color.b, i);
-            yield return null;
+            bannerMessage = GetComponentInChildren<TMP_Text>();
+            background = GetComponentInChildren<Image>();
+            spawnPoint = GameObject.Find("BannerSpawnPoint").transform;
+        }
+
+        private void Update() => PositionBanners();
+
+        private void PositionBanners()
+        {
+            var position = spawnPoint.position;
+            var bannerOffset = 0;
+            foreach (Transform banner in spawnPoint)
+            {
+                banner.position = new Vector3(position.x, position.y - bannerOffset, position.z);
+                bannerOffset += 120;    //not sure why this is the magic number... :(
+            }
+        }
+
+        //called by Event Trigger in inspector (on background)
+        public void OnPointerClickBanner() => FadeBannerMessage();
+
+        public void FadeBannerMessage() => StartCoroutine(nameof(FadeBannerMessageCoroutine));
+
+        public IEnumerator FadeBannerMessageCoroutine()
+        {
+            while (background.color != Color.clear)
+            {
+                background.color = Color.Lerp(background.color, Color.clear, .05f);
+                bannerMessage.color = Color.Lerp(bannerMessage.color, Color.clear, .05f);
+                
+                if (background.color.a < 0.1) Destroy(gameObject);
+                yield return null;
+            }
         }
     }
 }

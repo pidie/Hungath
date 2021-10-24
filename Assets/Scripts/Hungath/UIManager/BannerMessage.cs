@@ -8,6 +8,9 @@ public enum BannerMessageType
     AlertFoodGain = 17,
     AlertPopulationDecreasePredator = 18,
     AlertPopulationDecreaseDisease = 19,
+    AlertPopulationDecreaseStarvation = 20,
+    AlertGameOver = 21,
+    AlertPopulationGrowthTwin = 22,
     WarningGenericGameError = 48,
 }
 namespace Hungath.UIManager
@@ -16,7 +19,9 @@ namespace Hungath.UIManager
     {
         private static string _message;
 
-        public static void CreateNewBannerMessage(BannerMessageType bannerMessageType, dynamic value1=null, dynamic value2=null)
+        //todo: banners are being created one tile behind
+        public static void CreateNewBannerMessage(BannerMessageType bannerMessageType, dynamic value1=null, 
+            dynamic value2=null)
         {
             switch (bannerMessageType)
             {
@@ -27,7 +32,7 @@ namespace Hungath.UIManager
                     _message = $"You gained {value1} food!";
                     break;
                 case BannerMessageType.AlertPopulationGrowth:
-                    _message = $"Your Population increased by {value1}!";
+                    _message = $"Your Population has grown by {value1}!";
                     break;
                 case BannerMessageType.AlertPopulationDecreasePredator:
                     _message = $"A predator has killed {value1} of your Population.";
@@ -35,32 +40,37 @@ namespace Hungath.UIManager
                 case BannerMessageType.AlertPopulationDecreaseDisease:
                     _message = $"Disease has killed {value1} of your Population.";
                     break;
+                case BannerMessageType.AlertPopulationDecreaseStarvation:
+                    _message = $"You have lost {value1} Population due to Starvation!";
+                    break;
+                case BannerMessageType.AlertGameOver:
+                    _message = "Your Population is dead! Game Over";
+                    break;
+                case BannerMessageType.AlertPopulationGrowthTwin:
+                    _message = $"Your Population has had twins, and grown by {value1}!";
+                    break;
                 case BannerMessageType.WarningGenericGameError:
-                    _message = $"Oops, something went wrong!";
+                    _message = "Oops, something went wrong!";
                     break;
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException("This BannerMessageType has not yet been implemented.");
             }
-
-            int messageType;
-
-            if ((int) bannerMessageType == 0) messageType = -1;
-            else if ((int) bannerMessageType < 16) messageType = 0;
-            else if ((int) bannerMessageType >= 48) messageType = 2;
-            else messageType = 1;
             
-            ActivateBanner(messageType);
+            ActivateBanner((int) bannerMessageType);
         }
 
         private static void ActivateBanner(int messageType)
         {
-            Banner banner = GameObject.FindObjectOfType<Banner>();
-
-            if (messageType == -1)      banner.background.color = new Color(0, 0, 0, 0);
-            else if (messageType == 0)  banner.background.color = Color.cyan;
-            else if (messageType == 1)  banner.background.color = Color.black;
-            else if (messageType == 2)  banner.background.color = Color.red;
+            var banner = Resources.Load<Banner>("Prefabs/Banner");
+            MonoBehaviour.Instantiate(banner, GameObject.Find("BannerSpawnPoint").transform);
+            banner.name = messageType.ToString();
             
+            if      (messageType == 0)  banner.background.color = Color.clear;
+            else if (messageType < 16)  banner.background.color = Color.cyan;
+            else if (messageType < 48)  banner.background.color = Color.black;
+            else                        banner.background.color = Color.red;
+            
+            banner.bannerMessage.color = Color.white;
             banner.bannerMessage.text = _message;
             banner.background.enabled = true;
         }
