@@ -15,9 +15,35 @@ namespace Hungath.Game
 			{
 				_starved = 1;
 				Population.TotalPop -= _starved;
-				if (_random.Next(0, 1) > 0) Population.GathererPop -= 1;
-				else Population.HunterPop -= 1;
-				BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertPopulationDecreaseStarvation, _starved);
+
+				var popTypeLost = "";
+				var lostHunter = false;
+				var lostHunters = 0;
+				var lostGatherer = false;
+				var lostGatherers = 0;
+
+				for (int i = 0; i < _starved; i++)
+				{
+					if (_random.Next(0, 1) > 0)
+					{
+						Population.GathererPop -= _starved;
+						popTypeLost = "Gatherer";
+						lostGatherer = true;
+						lostGatherers++;
+					}
+					else
+					{
+						Population.HunterPop -= _starved;
+						popTypeLost = "Hunter";
+						lostHunter = true;
+						lostHunters++;
+					}
+				}
+
+				if (_starved > 1) popTypeLost += "s";
+				if (lostGatherer && lostHunter) NotificationMessage.CreateNewNotificationMessage(
+					NotificationMessageType.AlertPopulationDecreaseStarvationBothTypes, lostGatherers, "Gatherers", lostHunters, "Hunters");
+				else NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertPopulationDecreaseStarvationOneType, _starved, popTypeLost);
 			}
 		}
 	}

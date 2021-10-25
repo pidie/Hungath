@@ -18,14 +18,14 @@ namespace Hungath.Game
             if (roll <= foodPopRatio)
             {
                 children++;
-                var messageType = BannerMessageType.AlertPopulationGrowth;
+                var messageType = NotificationMessageType.AlertPopulationGrowth;
                 int twinCheck = _random.Next(1, 20);
                 if (twinCheck == 20)
                 {
                     children++;
-                    messageType = BannerMessageType.AlertPopulationGrowthTwin;
+                    messageType = NotificationMessageType.AlertPopulationGrowthTwin;
                 }
-                BannerMessage.CreateNewBannerMessage(messageType, children);
+                NotificationMessage.CreateNewNotificationMessage(messageType, children);
             }
             GiveBirth(children);
         }

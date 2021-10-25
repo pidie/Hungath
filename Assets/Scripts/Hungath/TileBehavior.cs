@@ -1,3 +1,4 @@
+using System;
 using Hungath.Game;
 using Hungath.UIManager;
 using UnityEngine;
@@ -23,51 +24,67 @@ namespace Hungath
         private void OnMouseDown()
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
-            else
-            {
-                if (isFaceDown)
-                {
-                    isFaceDown = false;
-                    transform.rotation = Quaternion.Euler(270f, 180f, 0);
-                    Breeding.CheckForBirth();
-                    Activate();
-                    Starvation.CheckForStarvation();
-                }
-            }
+            if (!isFaceDown) return;
+            
+            isFaceDown = false;
+            transform.rotation = Quaternion.Euler(270f, 180f, 0);
+            Breeding.CheckForBirth();
+            Activate();
+            Starvation.CheckForStarvation();
         }
 
         private void Activate()
         {
-            if (tileType == TileType.Berry)
+            switch (tileType)
             {
-                int foodGain = Population.GathererPop;
-                Food.AdjustFood(foodGain);
-                BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertFoodGain, foodGain);
-            }
-            else if (tileType == TileType.Land)
-            {
-                Food.AdjustFood(-Population.TotalPop);
-            }
-            else if (tileType == TileType.Goat)
-            {
-                int foodGain = Population.HunterPop * 3;
-                Food.AdjustFood(foodGain);
-                BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertFoodGain, foodGain);
-            }
-            else if (tileType == TileType.Predator)
-            {
-                int popLost = 1;
+                case TileType.Berry:
+                    var foodGain = Population.GathererPop;
+                    Food.AdjustFood(foodGain);
+                    NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertFoodGain, foodGain);
+                    break;
+                case TileType.Goat:
+                    foodGain = Population.HunterPop * 3;
+                    Food.AdjustFood(foodGain);
+                    NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertFoodGain, foodGain);
+                    break;
+                case TileType.Fish:
+                    foodGain = Population.HunterPop * 4;
+                    Food.AdjustFood(foodGain);
+                    NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertFoodGain, foodGain);
+                    break;
+                case TileType.Herd:
+                    foodGain = Population.HunterPop * 6;
+                    Food.AdjustFood(foodGain);
+                    NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertFoodGain, foodGain);
+                    break;
+                case TileType.Land:
+                    Food.AdjustFood(-Population.TotalPop);
+                    break;
+                case TileType.Predator:
+                    const int popLost = 1;      //this is only temporarily a constant
+                    var popTypeLost = "";
 
-                if (Population.HunterPop > 0)           Population.HunterPop -= popLost;
-                else if (Population.GathererPop > 0)    Population.GathererPop -= popLost;
-                else
-                {
-                    BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertGameOver);
-                    return;
-                }
+                    if (Population.HunterPop > 0)
+                    {
+                        Population.HunterPop -= popLost;
+                        popTypeLost = "Hunter";
+                    }
+                    else if (Population.GathererPop > 0)
+                    {
+                        Population.GathererPop -= popLost;
+                        popTypeLost = "Gatherer";
+                    }
+                    else
+                    {
+                        NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertGameOver);
+                        return;
+                    }
                 
-                Population.TotalPop -= popLost;
-                BannerMessage.CreateNewBannerMessage(BannerMessageType.AlertPopulationDecreasePredator, popLost);
+                    Population.TotalPop -= popLost;
+                    NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertPopulationDecreasePredator, popLost, popTypeLost);
+                    break;
+                default:
+                    throw new NotImplementedException("No tile!");
             }
         }
     }

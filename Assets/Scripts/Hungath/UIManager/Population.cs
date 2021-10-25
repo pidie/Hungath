@@ -33,6 +33,6 @@ namespace Hungath.UIManager
             totalPopText.text = TotalPop.ToString();
         }
 
-        public static void CenterSlider() => Slider.value = Slider.maxValue / 2.0f;
+        public static void CenterSlider() => Mathf.Ceil(Slider.value = Slider.maxValue / 2.0f);
     }
 }

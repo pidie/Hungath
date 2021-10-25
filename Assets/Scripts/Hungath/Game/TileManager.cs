@@ -33,23 +33,23 @@ namespace Hungath.Game
 
         private void GenerateTiles()
         {
-            GameObject tileContainer = GameObject.Find("Tiles");
-            float[] startPositions = GetStartPositions();
-            float xPosition = startPositions[0];
-            float yPosition = startPositions[1];
+            var tileContainer = GameObject.Find("Tiles");
+            var startPositions = GetStartPositions();
+            var xPosition = startPositions[0];
+            var yPosition = startPositions[1];
 
-            int lands = numOfLandTiles;
-            int berries = numOfBerryTiles;
-            int goats = numOfGoatTiles;
-            int predators = numOfPredatorTiles;
+            var lands = numOfLandTiles;
+            var berries = numOfBerryTiles;
+            var goats = numOfGoatTiles;
+            var predators = numOfPredatorTiles;
 
-            List<int> tilePool = new List<int> {lands, berries, goats, predators};
+            var tilePool = new List<int> {lands, berries, goats, predators};
 
-            for (int w = 0; w < _width; w++)
+            for (var w = 0; w < _width; w++)
             {
-                for (int h = 0; h < _height; h++)
+                for (var h = 0; h < _height; h++)
                 {
-                    GameObject tile = Resources.Load<GameObject>("Prefabs/Tile");
+                    var tile = Resources.Load<GameObject>("Prefabs/Tile");
                     RandomAssign(tilePool, tile.GetComponent<TileBehavior>());
 
                     Instantiate(tile, new Vector3(xPosition, 0, yPosition), Quaternion.identity,
@@ -64,8 +64,8 @@ namespace Hungath.Game
 
         private void RandomAssign(List<int> options, TileBehavior tile)
         {
-            int selection = -1;
-            bool looper = true;
+            var selection = -1;
+            var looper = true;
             
             while (looper)
             {
@@ -95,29 +95,29 @@ namespace Hungath.Game
                     throw new NotImplementedException("No tile type here");
             }
 
-            MeshRenderer meshRenderer = tile.face.GetComponent<MeshRenderer>();
+            var meshRenderer = tile.face.GetComponent<MeshRenderer>();
             meshRenderer.material = tile.tileImage;
             options[selection] -= 1;
         }
 
         private float[] GetStartPositions()
         {
-            float xPosition = (_width + (_width - 1) * TileBuffer) / -2;
-            float yPosition = (_height + (_height - 1) * TileBuffer) / -2;
+            var xPosition = (_width + (_width - 1) * TileBuffer) / -2;
+            var yPosition = (_height + (_height - 1) * TileBuffer) / -2;
 
             return new [] {xPosition + 0.5f, yPosition + 0.5f};
         }
 
         private void DetermineNumberOfTileTypes()
         {
-            int sumOfTiles = _height * _width;
+            var sumOfTiles = _height * _width;
 
             numOfLandTiles =        (int) Mathf.Round(sumOfTiles * landPercentage);
             numOfBerryTiles =       (int) Mathf.Round(sumOfTiles * berryPercentage);
             numOfGoatTiles =        (int) Mathf.Round(sumOfTiles * goatPercentage);
             numOfPredatorTiles =    (int) Mathf.Round(sumOfTiles * predatorPercentage);
 
-            int sumOfCreatedTiles = numOfBerryTiles + numOfLandTiles + numOfGoatTiles + numOfPredatorTiles;
+            var sumOfCreatedTiles = numOfBerryTiles + numOfLandTiles + numOfGoatTiles + numOfPredatorTiles;
 
             if (sumOfCreatedTiles < sumOfTiles)
             {
