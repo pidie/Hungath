@@ -60,6 +60,13 @@ namespace Hungath.UIManager
             notification.notificationMessage.text = _message;
             notification.background.enabled = true;
             Object.Instantiate(notification, _notificationContainer.transform);
+            NotificationCounter.UptickNotifications();
+
+            var children = _notificationContainer.transform.childCount;
+            var sizeDelta = _notificationContainer.GetComponent<RectTransform>().sizeDelta;
+            var notifHeight = 40 + Screen.height * 0.11f;
+
+            _notificationContainer.GetComponent<RectTransform>().sizeDelta = sizeDelta;
         }
     }
 }
