@@ -1,0 +1,44 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
+
+namespace Hungath.UIManager.MainMenu
+{
+    public class VolumeController : MonoBehaviour
+    {
+        public Slider volumeSlider;
+        public TMP_Text volumeText;
+        public Toggle volumeToggle;
+        public AudioMixer audioMixer;
+        public string audioGroup;
+
+        private float _currentVolume;
+
+        private void Awake()
+        {
+            volumeSlider.value = -20f;
+            SetVolume();
+        }
+
+        public void SetVolume()
+        {
+            volumeText.text = Mathf.RoundToInt(100 + volumeSlider.value * 1.25f) + "%";
+            audioMixer.SetFloat(audioGroup, volumeSlider.value);
+        }
+
+        public void ToggleVolume()
+        {
+            if (!volumeToggle.isOn) SaveVolumeValue();
+            else RestoreVolumeValue();
+        }
+
+        private void SaveVolumeValue()
+        {
+            _currentVolume = volumeSlider.value;
+            volumeSlider.value = -80f;
+        }
+
+        private void RestoreVolumeValue() => volumeSlider.value = _currentVolume;
+    }
+}
