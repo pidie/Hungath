@@ -1,8 +1,11 @@
 using System;
 using Hungath.Game;
+using Hungath.AudioManager;
 using Hungath.UIManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
+// todo: the call to SoundController.PlaySfx is resulting in a null value - parameter 'source' (see OnMouseDown)
 
 namespace Hungath
 {
@@ -12,6 +15,7 @@ namespace Hungath
         public Material tileImage, tileBackImage;
         public bool isFaceDown;
         public bool isGolden;
+        private AudioSource _audioSource;
  
         public GameObject face;
 
@@ -19,6 +23,8 @@ namespace Hungath
         {
             isFaceDown = true;
             transform.rotation = Quaternion.Euler(90, 0, 0);
+            // if (Camera.main is { }) audioSource = Camera.main.GetComponent<AudioSource>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void OnMouseDown()
@@ -29,6 +35,7 @@ namespace Hungath
             isFaceDown = false;
             transform.rotation = Quaternion.Euler(270f, 180f, 0);
             Breeding.CheckForBirth();
+            AudioController.PlaySfx(AudioClipBank.SfxTileFlip, _audioSource);
             Activate();
             Starvation.CheckForStarvation();
         }

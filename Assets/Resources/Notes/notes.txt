@@ -117,3 +117,12 @@ Tribes:
     Tribe of the Totem:
         - Special Event Tile spawn chance starts at 5%
         - Selecting a Land tile increases the spawn chance by +0.5%
+        
+        
+---------------------------------------------------------------------------------------------------------
+
+Credits
+
+Assets:
+    Audio:
+        - Heart of the Jungle: Alexander Hoff
