@@ -15,11 +15,7 @@ namespace Hungath.UIManager.MainMenu
 
         private float _currentVolume;
 
-        private void Awake()
-        {
-            volumeSlider.value = -20f;
-            SetVolume();
-        }
+        private void Awake() => SetVolume();
 
         public void SetVolume()
         {
@@ -29,8 +25,16 @@ namespace Hungath.UIManager.MainMenu
 
         public void ToggleVolume()
         {
-            if (!volumeToggle.isOn) SaveVolumeValue();
-            else RestoreVolumeValue();
+            if (!volumeToggle.isOn)
+            {
+                SaveVolumeValue();
+                volumeSlider.interactable = false;
+            }
+            else
+            {
+                RestoreVolumeValue();
+                volumeSlider.interactable = true;
+            }
         }
 
         private void SaveVolumeValue()

@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
+using Hungath.AudioManager;
+using UnityEngine.SceneManagement;
 
 namespace Hungath.Game
 {
@@ -7,10 +8,12 @@ namespace Hungath.Game
 	{
 		[SerializeField]
 		private GameObject optionsMenu;
+		[SerializeField]
+		private GameObject confirmExitMenu;
 
 		private void Awake()
 		{
-			LoadVolumeLevels();
+			AudioController.LoadVolumeLevels(optionsMenu);
 		}
 
 		private void Update()
@@ -21,20 +24,27 @@ namespace Hungath.Game
 			}
 		}
 
-		public void ToggleOptionsMenu()
+		public void ConfirmExitGame()
 		{
-			optionsMenu.SetActive(!optionsMenu.activeSelf);
+			optionsMenu.GetComponent<CanvasGroup>().alpha = 0.1f;
+			confirmExitMenu.SetActive(true);
 		}
 
-		private static void LoadVolumeLevels()
+		public void StayInGame()
 		{
-			GameObject.Find("MasterVolume/VolumeSlider").GetComponent<Slider>().value = Globals.MasterVolume;
-			GameObject.Find("MusicVolume/VolumeSlider").GetComponent<Slider>().value = Globals.MusicVolume;
-			GameObject.Find("SfxVolume/VolumeSlider").GetComponent<Slider>().value = Globals.SfxVolume;
-			GameObject.Find("VoicesVolume/VolumeSlider").GetComponent<Slider>().value = Globals.VoicesVolume;
+			confirmExitMenu.SetActive(false);
+			optionsMenu.GetComponent<CanvasGroup>().alpha = 1;
 		}
 
-		public static int[] GetMapSize(int population)
+		public void ReturnToMainMenu()
+		{
+			AudioController.SaveVolumeLevels(optionsMenu);
+			SceneManager.LoadScene("MainMenu");
+		}
+
+		public void ToggleOptionsMenu() => optionsMenu.SetActive(!optionsMenu.activeSelf);
+
+			public static int[] GetMapSize(int population)
 		{
 			var value = Mathf.Sqrt(population / 2.0f);
 			var fValue = Mathf.Floor(value);

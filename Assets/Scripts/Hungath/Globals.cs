@@ -5,9 +5,9 @@ namespace Hungath
         public const int MapDimensionMin = 3;
         public const int MapDimensionMax = 8;
 
-        public static float MasterVolume;
-        public static float MusicVolume;
-        public static float SfxVolume;
-        public static float VoicesVolume;
+        public static float MasterVolume = -20f;
+        public static float MusicVolume = -20f;
+        public static float SfxVolume = -20f;
+        public static float VoicesVolume = -20f;
     }
 }

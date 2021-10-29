@@ -5,8 +5,6 @@ using Hungath.UIManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-// todo: the call to SoundController.PlaySfx is resulting in a null value - parameter 'source' (see OnMouseDown)
-
 namespace Hungath
 {
     public class TileBehavior : MonoBehaviour
@@ -23,7 +21,6 @@ namespace Hungath
         {
             isFaceDown = true;
             transform.rotation = Quaternion.Euler(90, 0, 0);
-            // if (Camera.main is { }) audioSource = Camera.main.GetComponent<AudioSource>();
             _audioSource = GetComponent<AudioSource>();
         }
 

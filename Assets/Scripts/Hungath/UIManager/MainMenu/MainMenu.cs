@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using Hungath.AudioManager;
 
 namespace Hungath.UIManager.MainMenu
 {
@@ -9,22 +9,15 @@ namespace Hungath.UIManager.MainMenu
     {
         public GameObject optionsMenu;
 
-        public void StartNewGame()
+        private void Awake()
         {
-            SaveVolumeLevels();
-            StartCoroutine(StartGame());
+            AudioController.LoadVolumeLevels(optionsMenu);
         }
 
-        private void SaveVolumeLevels()
+        public void StartNewGame()
         {
-            optionsMenu.GetComponent<CanvasGroup>().alpha = 0;
-            optionsMenu.SetActive(true);
-            Globals.MasterVolume = GameObject.Find("MasterVolumeSlider").GetComponent<Slider>().value;
-            Globals.MusicVolume = GameObject.Find("MusicVolumeSlider").GetComponent<Slider>().value;
-            Globals.SfxVolume = GameObject.Find("SFXVolumeSlider").GetComponent<Slider>().value;
-            Globals.VoicesVolume = GameObject.Find("VoicesVolumeSlider").GetComponent<Slider>().value;
-            optionsMenu.SetActive(false);
-            optionsMenu.GetComponent<CanvasGroup>().alpha = 1;
+            AudioController.SaveVolumeLevels(optionsMenu);
+            StartCoroutine(StartGame());
         }
 
         public void QuitGame() => Application.Quit();
