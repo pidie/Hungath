@@ -1,0 +1,194 @@
+﻿Unity Components:
+
+-Audio:
+	-Audio Chorus Filter
+	-Audio Distortion Filter
+	-Audio Echo Filter
+	-Audio High Pass Filter
+	-Audio Listener
+	-Audio Low Pass Filter
+	-Audio Reverb Filter
+	-Audio Reverb Zone
+	-Audio Source
+-Effects:
+	-Halo
+	-Lens Flare
+	-Line Renderer
+	-Particle System
+	-Projector
+	-Trail Renderer
+	-Visual Effect
+-Event:
+	-Event System
+	-Event Trigger
+	-Graphic Raycaster
+	-Physics 2D Raycaster
+	-Physics Raycaster
+	-Standalone Input Module
+	-Touch Input Module
+-Layout:
+	-Aspect Ratio Filter
+	-Canvas
+	-Canvas Group
+	-Canvas Scaler
+	-Content Size Filter
+	-Grid Layout Group
+	-Horizontal Layout Group
+	-Layout Element
+	-Rect Transform
+	-Vertical Layout Group
+-Mesh:
+	-Mesh Filter
+	-Mesh Renderer
+	-Skinned Mesh Renderer
+	-Text Mesh
+	-TextMeshPro - Text
+-Miscellaneous:
+	-Aim Constraint
+	-Animation
+	-Animator
+	-Articulation Body
+	-Billboard Renderer
+	-Grid
+	-Look At Constraint
+	-Parent Constraint
+	-Particle System Force Field
+	-Position Constrain
+	-Rotation Constraint
+	-Scale Constraint
+	-Sprite Mask
+	-Sprite Shape Renderer
+	-Terrain
+	-Wind Zone
+-Navigation:
+	-Nav Mesh Agent
+	-Nav Mesh Obstacle
+	-Off Mesh Link
+-Physics 2D:
+    -Area Effector 2D
+    -Box Collider 2D
+    -Buoyancy Effector 2D
+    -Capsule Collider 2D
+    -Circle Collider 2D
+    -Composite Collider 2D
+    -Constant Force 2D
+    -Distance Joint 2D
+    -Edge Collider 2D
+    -Fixed Joint 2D
+    -Friction Joint 2D
+    -Hinge Joint 2D
+    -Platform Effector 2D
+    -Point Effector 2D
+    -Polygon Collider 2D
+    -Relative Joint 2D
+    -Rigidbody 2D
+    -Slider Joint 2D
+    -Spring Joint 2D
+    -Surface Effector 2D
+    -Target Joint 2D
+    -Wheel Joint 2D
+-Physics:
+    -Box Collider
+    -Capsule Collider
+    -Character Controller
+    -Character Joint
+    -Cloth
+    -Configurable Joint
+    -Constant Force
+    -Fixed Joint
+    -Hinge Joint
+    -Mesh Collider - Allows you to do collision detection between meshes and primitives.
+    -Rigidbody - Control of an object's position through Physics simulation.
+    -Sphere Collider - A sphere-shaped primitive collider.
+    -Spring Joint - The spring joint ties together 2 rigid bodies, spring forces will be automatically applied to keep 
+        the object at the given distance.
+    -Terrain Collider
+    -Wheel Collider
+-Playables:
+    -Playable Director
+-Rendering:
+    -Camera
+    -Canvas Renderer
+    -Flare Layer
+    -Light
+    -Light Probe Group
+    -Light Probe Proxy Volume
+    -LOD Group
+    -Occlusion Area
+    -Occlusion Portal
+    -Reflection Probe
+    -Skybox
+    -Sorting Group
+    -Sprite Renderer
+    -Streaming Controller
+-Scripts:
+	This section grants access to all scripts within your Assets folder. Folders that contain scripts within your Assets
+	folder will be displayed and can be opened, allowing you to maintain a neat organization of your Assets folder.
+-Tilemap:
+    -Tilemap
+    -Tilemap Collider 2D
+    -Tilemap Renderer
+-UI:
+    -Button
+    -Dropdown
+    -Dropdown - TextMeshPro
+    -Effects:
+        -Outline
+        -Position as UV1
+        -Shadow
+    -Image
+    -Input Field
+    -Mask
+    -Raw Image
+    -Rect Mask 2D
+    -Scroll Mask
+    -Scrollbar
+    -Selectable
+    -Slider
+    -Text
+    -TextMeshPro - Input Field
+    -TextMeshPro - Text (UI)
+    -Toggle
+    -Toggle Group
+-Video:
+    -Video Player
+-New Script:
+	-Name (NewBehaviourScript):
+		Creates a new script of name NewBehaviourScript and adds it to the Assets folder of your project.
+
+
+
+
+		
+UnityEngine.CoreModule:
+
+-AsyncOperation:
+    Called By: SceneManager, AssetBundle, Resources
+    Properties:
+        allowSceneActivation (bool): allow Scenes to be activated as soon as it is ready
+        isDone (bool): has the operation finished? (Read Only)
+            *Note - this value is set to true when progress reaches 0.9
+        priority (int): let's you tweak in which order async operation calls will be performed, with higher priorities being
+            executed first
+        progress (float): the progress of the operation, from 0 - 1. (Read Only)
+            *Note - unity uses the value 0 - 0.9 to load and 0.9 - 1 to activate
+    Events:
+        completed: event that is invoked on operation completion.
+
+
+
+UnityEngine.SceneManagement:
+
+-SceneManager:
+    -LoadScene (int sceneBuildIndex, SceneManagement.LoadSceneMode mode = LoadSceneMode.Single):
+        overloads:
+            (string sceneName, SceneManagement.LoadSceneMode mode = LoadSceneMode.Single)
+        return: LoadScene
+        Pauses the game to focus all resources on loading the scene.
+    -LoadSceneAsync (int sceneBuildIndex, SceneManagement.LoadSceneMode mode = LoadSceneMode.Single):
+        overloads: 
+            (string sceneName, SceneManagement.LoadSceneMode mode = LoadSceneMode.Single)
+            (int sceneBuildIndex, SceneManagement.LoadSceneParameters parameters)
+            (string sceneName, SceneManagement.LoadSceneParameters parameters)
+        return: AsyncOperation
+        Loads a scene asynchronously in the background
