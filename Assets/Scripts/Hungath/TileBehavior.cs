@@ -65,7 +65,8 @@ namespace Hungath
                     Food.AdjustFood(-Population.TotalPop);
                     break;
                 case TileType.Predator:
-                    const int popLost = 1;      //this is only temporarily a constant
+                {
+                    const int popLost = 1; //this is only temporarily a constant
                     var popTypeLost = "";
 
                     if (Population.HunterPop > 0)
@@ -83,9 +84,63 @@ namespace Hungath
                         NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertGameOver);
                         return;
                     }
-                
+
                     Population.TotalPop -= popLost;
-                    NotificationMessage.CreateNewNotificationMessage(NotificationMessageType.AlertPopulationDecreasePredator, popLost, popTypeLost);
+                    NotificationMessage.CreateNewNotificationMessage(
+                        NotificationMessageType.AlertPopulationDecreasePredator, popLost, popTypeLost);
+                    break;
+                }
+                case TileType.SetPlague:
+                    break;
+                case TileType.SetOasis:
+                    break;
+                case TileType.SetFertilityRites:
+                    break;
+                case TileType.SetHuntingNet:
+                    break;
+                case TileType.SetWanderingNomads:
+                    break;
+                case TileType.SetHuntingMap:
+                    break;
+                case TileType.SetAncientFarm:
+                    break;
+                case TileType.SetPredatorDen:
+                    break;
+                case TileType.SetRot:
+                    break;
+                case TileType.SetRockSlide:
+                    break;
+                case TileType.SetStampede:
+                    break;
+                case TileType.BonusSilos:
+                    break;
+                case TileType.BonusImprovedArrows:
+                    break;
+                case TileType.BonusImprovedBaskets:
+                    break;
+                case TileType.BonusCelestialLight:
+                    break;
+                case TileType.BonusHandOfMidas:
+                    break;
+                case TileType.BonusExperienced:
+                    break;
+                case TileType.BonusHunterOfHunters:
+                    break;
+                case TileType.BonusTracking:
+                    break;
+                case TileType.BonusReapingTools:
+                    break;
+                case TileType.BonusForagingParty:
+                    break;
+                case TileType.BonusLiveOffTheLand:
+                    break;
+                case TileType.BonusHardBellies:
+                    break;
+                case TileType.BonusEvasionTactics:
+                    break;
+                case TileType.BonusTwinning:
+                    break;
+                case TileType.BonusRomanticAllure:
                     break;
                 default:
                     throw new NotImplementedException("No tile!");

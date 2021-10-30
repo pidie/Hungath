@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +9,7 @@ namespace Hungath.UIManager
         public TMP_Text notificationMessage;
         public Image background;
         public GameObject container;
-        private int _currentNotifications;
+        private static int _currentNotifications;
 
         private void Awake()
         {
@@ -38,29 +37,6 @@ namespace Hungath.UIManager
 
                 _currentNotifications = NotificationCounter.GetNotifications();
             }
-        }
-
-        //called by Event Trigger in inspector (on background)
-        public void OnPointerClickNotification() => FadeNotificationMessage();
-
-        public void FadeNotificationMessage() => StartCoroutine(nameof(FadeNotificationMessageCoroutine));
-
-        public IEnumerator FadeNotificationMessageCoroutine()
-        {
-            while (background.color != Color.clear)
-            {
-                background.color = Color.Lerp(background.color, Color.clear, .02f);
-                notificationMessage.color = Color.Lerp(notificationMessage.color, Color.clear, .02f);
-                
-                if (background.color.a < 0.1) Destroy(gameObject);
-                yield return null;
-            }
-        }
-
-        public IEnumerator ThreeSecondKillSwitch()
-        {
-            yield return new WaitForSeconds(3f);
-            StartCoroutine(FadeNotificationMessageCoroutine());
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-namespace Hungath.UIManager.MainMenu
+namespace Hungath.AudioManager
 {
     public class VolumeController : MonoBehaviour
     {

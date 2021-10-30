@@ -1,9 +1,12 @@
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace Hungath
 {
-    public class Globals
+    public static class Globals
     {
-        public const int MapDimensionMin = 3;
-        public const int MapDimensionMax = 8;
+        public static int MapDimensionMin = 3;
+        public static int MapDimensionMax = 8;
 
         public static float MasterVolume = -20f;
         public static float MusicVolume = -20f;
