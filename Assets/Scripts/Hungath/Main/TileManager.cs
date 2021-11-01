@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Hungath.Main.TileTypes;
 using UnityEngine;
 using Hungath.UIManager;
 using Random = System.Random;
 
-namespace Hungath.Game
+namespace Hungath.Main
 {
     public class TileManager : MonoBehaviour
     {
@@ -119,10 +120,7 @@ namespace Hungath.Game
 
             var sumOfCreatedTiles = numOfBerryTiles + numOfLandTiles + numOfGoatTiles + numOfPredatorTiles;
 
-            if (sumOfCreatedTiles < sumOfTiles)
-            {
-                numOfPredatorTiles++;
-            }
+            if (sumOfCreatedTiles < sumOfTiles) numOfPredatorTiles++;
         }
     }
 }

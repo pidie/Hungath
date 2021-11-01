@@ -1,7 +1,9 @@
 using System;
-using Hungath.Game;
+using Hungath.Main;
+using Hungath.Main.TileTypes;
 using Hungath.AudioManager;
 using Hungath.UIManager;
+using Hungath.UIManager.Notifications;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,8 +15,9 @@ namespace Hungath
         public Material tileImage, tileBackImage;
         public bool isFaceDown;
         public bool isGolden;
+        
         private AudioSource _audioSource;
- 
+
         public GameObject face;
 
         private void Awake()
@@ -31,10 +34,18 @@ namespace Hungath
             
             isFaceDown = false;
             transform.rotation = Quaternion.Euler(270f, 180f, 0);
+            
             Breeding.CheckForBirth();
             AudioController.PlaySfx(AudioClipBank.SfxTileFlip, _audioSource);
             Activate();
             Starvation.CheckForStarvation();
+
+            GameManager.IsRoundOver = CheckForRoundOver();
+        }
+
+        private static bool CheckForRoundOver()
+        {
+            return GameManager.GetFaceDownTilesCount() == 0;
         }
 
         private void Activate()

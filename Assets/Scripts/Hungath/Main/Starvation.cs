@@ -1,7 +1,8 @@
 using Hungath.UIManager;
+using Hungath.UIManager.Notifications;
 using Random = System.Random;
 
-namespace Hungath.Game
+namespace Hungath.Main
 {
 	public static class Starvation
 	{

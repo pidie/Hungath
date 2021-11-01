@@ -1,6 +1,7 @@
 using Hungath.UIManager;
+using Hungath.UIManager.Notifications;
 
-namespace Hungath.Game
+namespace Hungath.Main
 {
     public static class Breeding
     {

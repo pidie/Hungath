@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hungath.UIManager
+namespace Hungath.UIManager.Notifications
 {
     public class Notification : MonoBehaviour
     {

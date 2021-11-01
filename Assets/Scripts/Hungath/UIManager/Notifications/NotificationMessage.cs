@@ -15,12 +15,12 @@ public enum NotificationMessageType
     AlertPopulationDecreaseStarvationBothTypes = 23,
     WarningGenericGameError = 48,
 }
-namespace Hungath.UIManager
+namespace Hungath.UIManager.Notifications
 {
     public static class NotificationMessage
     {
         private static string _message;
-        private static GameObject _notificationContainer = GameObject.Find("NotificationContainer");
+        private static readonly GameObject NotificationContainer = GameObject.Find("NotificationContainer");
 
         public static void CreateNewNotificationMessage(NotificationMessageType notificationMessageType, dynamic value1=null, 
             dynamic value2=null, dynamic value3=null, dynamic value4=null, dynamic value5=null)
@@ -53,20 +53,18 @@ namespace Hungath.UIManager
             
             if      (messageType == 0)  notification.background.color = Color.clear;
             else if (messageType < 16)  notification.background.color = new Color32(0, 255, 255, 175);
-            else if (messageType < 48)  notification.background.color = new Color32(24, 24, 24, 175);
+            else if (messageType < 48)  notification.background.color = Globals.ChangeAlpha32(Globals.ThemeDarkBackground, Globals.Translucent4);
             else                        notification.background.color = new Color32(255, 0, 0, 175);
             
             notification.notificationMessage.color = Color.white;
             notification.notificationMessage.text = _message;
             notification.background.enabled = true;
-            Object.Instantiate(notification, _notificationContainer.transform);
+            Object.Instantiate(notification, NotificationContainer.transform);
             NotificationCounter.UptickNotifications();
 
-            var children = _notificationContainer.transform.childCount;
-            var sizeDelta = _notificationContainer.GetComponent<RectTransform>().sizeDelta;
-            var notifHeight = 40 + Screen.height * 0.11f;
+            var sizeDelta = NotificationContainer.GetComponent<RectTransform>().sizeDelta;
 
-            _notificationContainer.GetComponent<RectTransform>().sizeDelta = sizeDelta;
+            NotificationContainer.GetComponent<RectTransform>().sizeDelta = sizeDelta;
         }
     }
 }

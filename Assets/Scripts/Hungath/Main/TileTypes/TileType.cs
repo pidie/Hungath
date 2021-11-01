@@ -1,4 +1,4 @@
-namespace Hungath
+namespace Hungath.Main.TileTypes
 {
 	public enum TileType
 	{

@@ -1,4 +1,4 @@
-namespace Hungath.UIManager
+namespace Hungath.UIManager.Notifications
 {
     public static class NotificationCounter
     {

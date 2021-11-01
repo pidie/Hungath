@@ -1,8 +1,9 @@
+using System.Linq;
 using UnityEngine;
 using Hungath.AudioManager;
 using UnityEngine.SceneManagement;
 
-namespace Hungath.Game
+namespace Hungath.Main
 {
 	public class GameManager : MonoBehaviour
 	{
@@ -11,8 +12,12 @@ namespace Hungath.Game
 		[SerializeField]
 		private GameObject confirmExitMenu;
 
+		public static GameObject Tiles;
+		public static bool IsRoundOver;
+
 		private void Awake()
 		{
+			Tiles = GameObject.Find("Tiles");
 			AudioController.LoadVolumeLevels(optionsMenu);
 		}
 
@@ -22,7 +27,22 @@ namespace Hungath.Game
 			{
 				ToggleOptionsMenu();
 			}
+
+			if (IsRoundOver) NewRound();
 		}
+
+		public static int GetFaceDownTilesCount()
+		{
+			return Tiles.GetComponentInChildren<Transform>().Cast<Transform>().Count(
+				tile => tile.gameObject.GetComponent<TileBehavior>().isFaceDown);
+		}
+
+		private void NewRound()
+		{
+			IsRoundOver = false;
+			SceneManager.LoadScene("Game");
+		}
+		
 
 		public void ConfirmExitGame()
 		{
@@ -32,6 +52,7 @@ namespace Hungath.Game
 
 		public void StayInGame()
 		{
+			Debug.Log(GetFaceDownTilesCount());
 			confirmExitMenu.SetActive(false);
 			optionsMenu.GetComponent<CanvasGroup>().alpha = 1;
 		}
